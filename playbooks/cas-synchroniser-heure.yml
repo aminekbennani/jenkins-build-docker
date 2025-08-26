@@ -1,0 +1,24 @@
+---
+- name: "CAS 5: Synchroniser l'heure"
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: Installer NTP
+      apt:
+        name: ntp
+        state: present
+        
+    - name: Démarrer le service NTP
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+        
+    - name: Vérifier l'heure actuelle
+      command: date
+      register: heure_actuelle
+      
+    - name: Afficher l'heure
+      debug:
+        msg: "Heure sur le serveur : {{ heure_actuelle.stdout }}"

@@ -1,0 +1,21 @@
+---
+- name: Installation avec variables
+  hosts: test
+  become: yes
+  vars:
+    packages:
+      - tree
+      - curl
+      - git
+    message: "Installation terminée"
+    
+  tasks:
+    - name: Installer les paquets
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+      
+    - name: Afficher le message
+      debug:
+        msg: "{{ message }} - Paquets installés : {{ packages }}"

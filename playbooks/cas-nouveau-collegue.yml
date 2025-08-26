@@ -1,0 +1,11 @@
+---
+- name: "CAS 2: Créer un utilisateur"
+  hosts: test
+  become: yes  # ← POURQUOI ? Créer un user = action admin
+  
+  tasks:
+    - name: Créer l'utilisateur alice
+      user:               # ← Module à utiliser
+        name: alice       # ← Nom d'utilisateur  
+        state: present    # ← Je VEUX qu'il existe
+        groups: sudo      # ← Groupe pour droits admin

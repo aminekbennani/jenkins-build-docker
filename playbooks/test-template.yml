@@ -1,0 +1,21 @@
+---
+- name: Tester les templates
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: Créer fichier depuis template
+      template:
+        src: welcome.txt.j2
+        dest: /tmp/welcome.txt
+        owner: root
+        group: root
+        mode: '0644'
+        
+    - name: Afficher le contenu généré
+      command: cat /tmp/welcome.txt
+      register: fichier_contenu
+      
+    - name: Montrer le résultat
+      debug:
+        msg: "{{ fichier_contenu.stdout_lines }}"

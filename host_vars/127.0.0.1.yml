@@ -1,0 +1,4 @@
+---
+message_host: "Message spécifique à cette machine (127.0.0.1)"
+outil_special: "figlet"
+priorite_host: "haute"

@@ -1,0 +1,28 @@
+---
+- name: Déployer Apache et une page HTML personnalisée
+  hosts: serveurs
+  become: yes
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    - name: Installer Apache
+      apt:
+        name: "{{ apache_package }}"
+        state: present
+        update_cache: yes
+
+    - name: Créer une page HTML personnalisée
+      copy:
+        dest: "/var/www/html/{{ html_page }}"
+        content: "{{ html_content }}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: S'assurer que Apache est en cours d'exécution
+      service:
+        name: "{{ apache_package }}"
+        state: started
+        enabled: yes

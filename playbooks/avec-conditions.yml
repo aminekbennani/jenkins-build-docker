@@ -1,0 +1,25 @@
+---
+- name: Installation conditionnelle
+  hosts: test
+  become: yes
+  vars:
+    installer_docker: false
+    installer_nginx: true
+    
+  tasks:
+    - name: Installer nginx si demandé
+      apt:
+        name: nginx
+        state: present
+      when: installer_nginx == true
+      
+    - name: Installer docker si demandé
+      apt:
+        name: docker.io
+        state: present
+      when: installer_docker == true
+      
+    - name: Message si docker pas installé
+      debug:
+        msg: "Docker non installé (installer_docker = false)"
+      when: installer_docker == false

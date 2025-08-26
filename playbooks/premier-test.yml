@@ -1,0 +1,15 @@
+---
+- name: Mon premier playbook  
+  hosts: test
+  tasks:
+    - name: Afficher un message
+      debug:
+        msg: "Bravo ! Ansible fonctionne sur ma machine"
+        
+    - name: Voir la date système
+      command: date
+      register: date_actuelle
+      
+    - name: Afficher la date
+      debug:
+        msg: "Date: {{ date_actuelle.stdout }}"

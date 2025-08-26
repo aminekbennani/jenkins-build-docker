@@ -1,0 +1,5 @@
+---
+message_groupe: "Message depuis group_vars pour le groupe test"
+outils_supplementaires:
+  - nano
+  - wget

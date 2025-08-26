@@ -1,0 +1,26 @@
+---
+- name: "CAS 6: Installer monitoring"
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: Installer netdata
+      apt:
+        name: netdata
+        state: present
+        
+    - name: Démarrer netdata  
+      service:
+        name: netdata
+        state: started
+        enabled: yes
+        
+    - name: Vérifier le service
+      uri:
+        url: http://127.0.0.1:19999
+        method: GET
+      register: monitoring_check
+      
+    - name: Afficher le résultat
+      debug:
+        msg: "Monitoring accessible : {{ monitoring_check.status == 200 }}"

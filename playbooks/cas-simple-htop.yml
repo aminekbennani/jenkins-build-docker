@@ -1,0 +1,10 @@
+---
+- name: "CAS SIMPLE: Installer htop partout"
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: Installer htop
+      apt:
+        name: htop
+        state: present

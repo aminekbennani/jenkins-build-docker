@@ -1,0 +1,16 @@
+---
+- name: Utiliser le rôle common
+  hosts: test
+  become: yes
+  
+  roles:
+    - common
+    
+  tasks:
+    - name: Vérifier que l'utilisateur deploy existe
+      command: id deploy
+      register: user_info
+      
+    - name: Afficher les infos utilisateur
+      debug:
+        msg: "Utilisateur deploy créé : {{ user_info.stdout }}"

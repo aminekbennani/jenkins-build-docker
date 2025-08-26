@@ -1,0 +1,21 @@
+---
+- name: Installer l'outil htop
+  hosts: test
+  become: yes
+  tasks:
+    - name: Mettre à jour le cache apt
+      apt:
+        update_cache: yes
+        
+    - name: Installer htop
+      apt:
+        name: htop
+        state: present
+        
+    - name: Vérifier l'installation
+      command: which htop
+      register: htop_path
+      
+    - name: Confirmer l'installation
+      debug:
+        msg: "htop installé dans : {{ htop_path.stdout }}"

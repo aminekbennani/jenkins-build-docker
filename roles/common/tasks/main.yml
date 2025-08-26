@@ -1,0 +1,19 @@
+---
+- name: Installer les outils de base
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - htop
+    - tree
+    - curl
+    - git
+    - vim
+
+- name: Créer un utilisateur système
+  user:
+    name: deploy
+    system: yes
+    shell: /bin/bash---
+# tasks file for common

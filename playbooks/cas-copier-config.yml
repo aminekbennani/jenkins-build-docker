@@ -1,0 +1,18 @@
+---
+- name: "CAS 4: Copier config SSH"
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: Copier la config SSH
+      copy:
+        src: files/sshd_config
+        dest: /tmp/sshd_config_test  # Test d'abord !
+        owner: root
+        mode: '0644'
+      notify: afficher_message
+      
+  handlers:
+    - name: afficher_message
+      debug:
+        msg: "Fichier copié avec succès !"

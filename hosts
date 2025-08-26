@@ -1,0 +1,9 @@
+[local]
+127.0.0.1 ansible_connection=local
+
+[vm_distante]
+192.168.186.128 ansible_user=amine
+
+[all_machines:children]
+local
+vm_distante

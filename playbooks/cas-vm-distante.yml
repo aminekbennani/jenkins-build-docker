@@ -1,0 +1,18 @@
+---
+- name: "CAS PRATIQUE: Installer htop sur VM distante"
+  hosts: vm_distante
+  become: yes
+  
+  tasks:
+    - name: Installer htop
+      apt:
+        name: htop
+        state: present
+        
+    - name: Vérifier installation
+      command: which htop
+      register: htop_installed
+      
+    - name: Confirmer
+      debug:
+        msg: "htop installé sur VM distante : {{ htop_installed.stdout }}"

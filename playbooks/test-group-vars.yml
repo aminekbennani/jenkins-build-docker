@@ -1,0 +1,19 @@
+---
+- name: Tester les group_vars
+  hosts: test
+  become: yes
+  
+  tasks:
+    - name: Afficher le message du groupe
+      debug:
+        msg: "{{ message_groupe }}"
+        
+    - name: Installer les outils supplémentaires
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ outils_supplementaires }}"
+      
+    - name: Confirmer installation
+      debug:
+        msg: "Outils installés : {{ outils_supplementaires }}"
